@@ -11,26 +11,37 @@ compiler:
     - clang
     - gcc
 
+env:
+    - LLVM_VERSION=3.8.0
+    - LLVM_ARCHIVE_PATH=$HOME/clang+llvm.tar.xz
+    - CXX=$HOME/clang-$LLVM_VERSION/bin/clang++
+    - CPPFLAGS="-I$HOME/clang-$LLVM_VERSION/include/c++/v1"
+    - CXXFLAGS=-lc++
+    - LD_LIBRARY_PATH=$HOME/clang-$LLVM_VERSION/lib:$LD_LIBRARY_PATH
+
 before_install:
     - lsb_release -a
+    - wget http://llvm.org/releases/$LLVM_VERSION/clang+llvm-$LLVM_VERSION-x86_64-linux-gnu-ubuntu-14.04.tar.xz -0 $LLVM_ARCHIVE_PATH
+    - mkdir -p $HOME/clang-$LLVM_VERSION
+    - tar xf $LLVM_ARCHIVE_PATH -C $HOME/clang-$LLVM_VERSION --strip-components 1
 
-install:
-    - if [ "$CXX" = "g++" ]; then export CXX="g++-4.8" CC="gcc-4.8"; fi
+#install:
+#   - if [ "$CXX" = "g++" ]; then export CXX="g++-4.8" CC="gcc-4.8"; fi
 
 addons: &addons
     apt:
         sources:
             - ubuntu-toolchain-r-test
-            - llvm-toolchain-precise-3.5
-            - llvm-toolchain-precise-3.6
-            - llvm-toolchain-precise-3.7
-            - llvm-toolchain-precise-3.8
-            - llvm-toolchain-precise
+            # - llvm-toolchain-precise-3.5
+            # - llvm-toolchain-precise-3.6
+            # - llvm-toolchain-precise-3.7
+            # - llvm-toolchain-precise-3.8
+            # - llvm-toolchain-precise
             - ubuntu-sdk-team
         packages: &packages
             - gcc-5
             - g++-5
-            - clang-3.8.0
+            # - clang-3.8.0
             - libstdc++-5-dev
             
 
@@ -39,15 +50,15 @@ before_script:
         case "$CXX" in #(
         g++*) CXX=g++-5 #(
         ;;
-        clang++*) CXX=clang++-3.8.0
-        ;;
+        # clang++*) CXX=clang++-3.8.0
+        # ;;
         esac
     - |
         case "$CC" in #(
         gcc*) CC=gcc-5 #(
         ;;
-        clang*)  CC=clang-3.8.0
-        ;;
+        # clang*)  CC=clang-3.8.0
+        # ;;
         esac
     - export CXX CC
     - cp -r cmake/* NoahGameFrame && cd NoahGameFrame && chmod +x install.sh && ./install.sh
