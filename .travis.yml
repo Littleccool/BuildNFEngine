@@ -7,7 +7,7 @@ compiler:
     - clang
     - gcc
 before_script:
-    - cp cmake/* NoahGameFrame && cd NoahGameFrame && chmod +x install.sh && ./install.sh
+    - cp -r cmake/* NoahGameFrame && cd NoahGameFrame && chmod +x install.sh && ./install.sh
     - mkdir -p build && cd build && cmake .. && ls && cat Makefile
 
 script:
