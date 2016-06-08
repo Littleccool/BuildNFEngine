@@ -1,0 +1,10 @@
+language: cpp
+compiler:
+    - clang
+    - gcc
+os:
+    - linux
+    - osx
+
+script:
+    - cd NoahGameFrame && chmod +x install.sh && ./install.sh

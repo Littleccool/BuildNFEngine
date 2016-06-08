@@ -1,0 +1,3 @@
+[submodule "NoahGameFrame"]
+	path = NoahGameFrame
+	url = https://github.com/ketoo/NoahGameFrame.git
