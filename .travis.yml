@@ -1,6 +1,7 @@
-language: cpp
+
 sudo:
     false
+language: cpp
 
 os:
     - linux
@@ -32,7 +33,7 @@ before_script:
         case "$CXX" in #(
         g++*) CXX=g++-5 #(
         ;;
-        clang++*)  CXX=clang++-3.7 
+        clang++*) CXX=clang++-3.7 
         ;;
         esac
     - |
