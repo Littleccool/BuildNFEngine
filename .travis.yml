@@ -1,4 +1,7 @@
 language: cpp
+sudo:
+    false
+
 os:
     - linux
     - osx
@@ -10,16 +13,36 @@ compiler:
 install:
     - if [ "$CXX" = "g++" ]; then export CXX="g++-4.8" CC="gcc-4.8"; fi
 
-addons:
+addons: &addons
     apt:
         sources:
             - ubuntu-toolchain-r-test
-        packages:
-            - gcc-4.8
-            - g++-4.8
-            - clang
+            - llvm-toolchain-precise-3.7
+            - llvm-toolchain-precise
+            - ubuntu-sdk-team
+        packages: &packages
+            - gcc-5
+            - g++-5
+            - clang-3.7
+            - libstdc++-5-dev
+            
 
 before_script:
+    - |
+        case "$CXX" in #(
+        g++*) CXX=g++-5 #(
+        ;;
+        clang++*)  CXX=clang++-3.7 
+        ;;
+        esac
+    - |
+        case "$CC" in #(
+        gcc*) CC=gcc-5 #(
+        ;;
+        clang*)  CC=clang-3.7 
+        ;;
+        esac
+    - export CXX CC
     - cp -r cmake/* NoahGameFrame && cd NoahGameFrame && chmod +x install.sh && ./install.sh
     - mkdir -p build && cd build && cmake .. && ls && cat Makefile
 
