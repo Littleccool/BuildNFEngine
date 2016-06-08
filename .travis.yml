@@ -12,6 +12,7 @@ compiler:
     - gcc
 
 env:
+    global:
     - LLVM_VERSION=3.8.0
     - LLVM_ARCHIVE_PATH=$HOME/clang+llvm.tar.xz
     - CXX=$HOME/clang-$LLVM_VERSION/bin/clang++
