@@ -11,6 +11,9 @@ compiler:
     - clang
     - gcc
 
+before_install:
+    - lsb_release -a
+
 install:
     - if [ "$CXX" = "g++" ]; then export CXX="g++-4.8" CC="gcc-4.8"; fi
 
@@ -21,12 +24,13 @@ addons: &addons
             - llvm-toolchain-precise-3.5
             - llvm-toolchain-precise-3.6
             - llvm-toolchain-precise-3.7
+            - llvm-toolchain-precise-3.8
             - llvm-toolchain-precise
             - ubuntu-sdk-team
         packages: &packages
             - gcc-5
             - g++-5
-            - clang-3.7
+            - clang-3.8.0
             - libstdc++-5-dev
             
 
@@ -35,14 +39,14 @@ before_script:
         case "$CXX" in #(
         g++*) CXX=g++-5 #(
         ;;
-        clang++*) CXX=clang++-3.7 
+        clang++*) CXX=clang++-3.8.0
         ;;
         esac
     - |
         case "$CC" in #(
         gcc*) CC=gcc-5 #(
         ;;
-        clang*)  CC=clang-3.7 
+        clang*)  CC=clang-3.8.0
         ;;
         esac
     - export CXX CC
