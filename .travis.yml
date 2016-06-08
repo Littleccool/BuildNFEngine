@@ -6,6 +6,9 @@ os:
 compiler:
     - clang
     - gcc
+
+install:
+    - if [ "$CXX" = "g++" ]; then export CXX="g++4.8" CC="gcc-4.8"; fi
 before_script:
     - cp -r cmake/* NoahGameFrame && cd NoahGameFrame && chmod +x install.sh && ./install.sh
     - mkdir -p build && cd build && cmake .. && ls && cat Makefile
