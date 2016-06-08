@@ -9,4 +9,4 @@ ${SolutionDir}/Dependencies/
 ${SolutionDir}/Dependencies/Theron/Include/ 
 ${SolutionDir}/Dependencies/Theron/Include/External/
 )
-add_subdirectory(NFComm\NFPluginLoader)
+add_subdirectory(NFComm/NFPluginLoader)
