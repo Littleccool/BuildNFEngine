@@ -1,6 +1,7 @@
+# use ubuntu-14.4
+sudo: required
+dist: trusty
 
-sudo:
-    false
 language: cpp
 
 os:
@@ -46,25 +47,7 @@ addons: &addons
             
 
 before_script:
-    - |
-        if [ $TRAVIS_OS_NAME = linux ]; then
-            case "$CXX" in #(
-            g++*) CXX=g++-5
-            ;;
-            # clang++*) CXX=clang++-3.8.0
-            # ;;
-        esac
-        fi
-    - |
-        if [ $TRAVIS_OS_NAME = linux ]; then
-            case "$CC" in #(
-            gcc*) CC=gcc-5
-            ;;
-            # clang*)  CC=clang-3.8.0
-            # ;;
-        esac
-        fi
-    - export CXX CC && $CXX --version && $CC --version 
+    - $CXX --version && $CC --version 
     - cp -r cmake/* NoahGameFrame && cd NoahGameFrame && chmod +x install.sh && ./install.sh
     - mkdir -p build && cd build && cmake .. && ls && cat Makefile
 
